@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "strict": false,
+    "skipLibCheck": true
+  },
+  "typeRoots": "node_modules/@types",
+  "extends": "expo/tsconfig.base"
+}
