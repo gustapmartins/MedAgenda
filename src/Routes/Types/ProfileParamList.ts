@@ -12,6 +12,7 @@ export type AuthParamList = {
 export type MainParamList = {
   Home: undefined;
   Profile: undefined;
+  Settings: undefined;
   Consultation: undefined;
   Notifications: undefined;
   Terms: undefined;

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 import GoBackHeader from "../../Components/GoBackHeader";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { useTheme } from "../../Hooks/ThemeContext";
+import Input from "../../Components/Input";
 
 type RootStackParamList = {
   Profile: { name: string };
@@ -12,8 +14,8 @@ type ProfileScreenProps = NativeStackScreenProps<RootStackParamList, "Profile">;
 
 const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
   // Estado para armazenar o nome e email do usuário
-  const [name, setName] = useState("Gustavo Pereira Martins");
-  const [email, setEmail] = useState("gustavo@email.com");
+  const [name, setName] = useState("Gustavo");
+  const [email, setEmail] = useState("gustavo@gmail.com");
 
   // Função para salvar as alterações (pode ser conectada a uma API ou base de dados)
   const handleSave = () => {
@@ -22,15 +24,17 @@ const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
     // Aqui você pode salvar os dados na API ou em um banco de dados
   };
 
+  const {colors} = useTheme();
+  
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       <GoBackHeader onPress={() => navigation.goBack()} title="Perfil" />
 
-      <Text style={styles.label}>Nome</Text>
-      <TextInput style={styles.input} value={name} onChangeText={setName} />
+      <Text style={[styles.label, { color: colors.text }]}>Nome</Text>
+      <Input onChangeValue={setName} value={name} placeholder={name} secureTextEntry={false} />
 
-      <Text style={styles.label}>Email</Text>
-      <TextInput style={styles.input} value={email} onChangeText={setEmail} />
+      <Text style={[styles.label, { color: colors.text }]}>Email</Text>
+      <Input onChangeValue={setEmail} value={email} placeholder={email} secureTextEntry={false} />
 
       <Button title="Salvar Alterações" onPress={handleSave} />
     </View>
@@ -40,7 +44,6 @@ const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f3f3f3",
     paddingTop: 50,
     paddingHorizontal: 20,
   },

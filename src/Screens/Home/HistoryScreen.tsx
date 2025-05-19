@@ -11,6 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import NotificationCard from "../../Components/NotificationCard";
 import GoBackHeader from "../../Components/GoBackHeader";
+import { useTheme } from "../../Hooks/ThemeContext";
 
 const appointments = [
   {
@@ -35,26 +36,29 @@ type RootStackParamList = {
 type HistoryScreenProps = NativeStackScreenProps<RootStackParamList, "History">;
 
 const HistoryScreen = ({ navigation }: HistoryScreenProps) => {
+  
+  const { colors } = useTheme();
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       {/* Header */}
       <GoBackHeader title="Histórico" onPress={() => navigation.goBack()} />
 
       {/* Filtros */}
       <View style={styles.filters}>
-        <TouchableOpacity style={styles.dropdown}>
-          <Text style={styles.dropdownText}>Escolha uma especialidade</Text>
-          <Icon name="chevron-down" size={20} color="#777" />
+        <TouchableOpacity style={[styles.dropdown, { backgroundColor: colors.card }]}>
+          <Text style={{ color: colors.text }}>Escolha uma especialidade</Text>
+          <Icon name="chevron-down" size={20} color={colors.text} />
         </TouchableOpacity>
 
         <View style={styles.dateRow}>
-          <TouchableOpacity style={styles.datePicker}>
-            <Text style={styles.dropdownText}>Data inicial</Text>
-            <Icon name="calendar" size={20} color="#777" />
+          <TouchableOpacity style={[styles.datePicker, { backgroundColor: colors.card }]}>
+            <Text style={{ color: colors.text }}>Data inicial</Text>
+            <Icon name="calendar" size={20} color={colors.text} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.datePicker}>
-            <Text style={styles.dropdownText}>Data final</Text>
-            <Icon name="calendar" size={20} color="#777" />
+          <TouchableOpacity style={[styles.datePicker, { backgroundColor: colors.card }]}>
+            <Text style={{ color: colors.text }}>Data final</Text>
+            <Icon name="calendar" size={20} color={colors.text} />
           </TouchableOpacity>
         </View>
       </View>
@@ -75,7 +79,6 @@ const HistoryScreen = ({ navigation }: HistoryScreenProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f3f3f3",
     paddingTop: 50,
     paddingHorizontal: 20,
   },
@@ -107,9 +110,6 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     marginBottom: 12,
   },
-  dropdownText: {
-    color: "#555",
-  },
   dateRow: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -119,7 +119,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "#fff",
     padding: 12,
     borderRadius: 6,
     flex: 1,

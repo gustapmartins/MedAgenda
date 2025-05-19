@@ -4,11 +4,12 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
   },
+  
   card: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#fff',
+
     borderRadius: 12,
     padding: 24,
     elevation: 4,

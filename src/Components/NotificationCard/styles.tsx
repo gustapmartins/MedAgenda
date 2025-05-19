@@ -3,7 +3,6 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     card: {
     flexDirection: "row",
-    backgroundColor: "#fff",
     borderRadius: 10,
     padding: 16,
     marginBottom: 12,
@@ -29,7 +28,6 @@ const styles = StyleSheet.create({
   },
   date: {
     fontSize: 13,
-    color: "#555",
     marginLeft: 6,
   },
 });

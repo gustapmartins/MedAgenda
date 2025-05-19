@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-} from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { CheckBox } from "@rneui/themed";
 import { FontAwesome } from "@expo/vector-icons";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
@@ -35,20 +30,23 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
         Entre com seu email e sua senha para realizar o login
       </Text>
 
-      <Input
-        placeholder="E-mail"
-        onChangeValue={setEmail}
-        secureTextEntry={false}
-        value={email}
-      />
+      <View style={styles.inputContainer}>
+        <Input
+          placeholder="E-mail"
+          onChangeValue={setEmail}
+          secureTextEntry={false}
+          value={email}
+        />
+      </View>
 
-      <Input
-        placeholder="Senha"
-        onChangeValue={setPassword}
-        secureTextEntry
-        value={password}
-      />
-
+      <View style={styles.inputContainer}>
+        <Input
+          placeholder="Senha"
+          onChangeValue={setPassword}
+          secureTextEntry
+          value={password}
+        />
+      </View>
       <View style={styles.rememberMeContainer}>
         <View>
           <CheckBox
@@ -60,6 +58,7 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
               margin: 0,
               marginLeft: 0,
               marginRight: 0,
+              backgroundColor: "transparent",
             }}
             onPress={() => {
               setCheck(!check);
@@ -133,8 +132,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 
-  inputContainer: {
-    marginBottom: 15,
+   inputContainer: {
+    marginTop: 20,
   },
 
   rememberMeContainer: {
@@ -144,8 +143,6 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     marginTop: 10,
   },
-
-  forgotPasswordText: {},
 
   loginButton: {
     backgroundColor: "#FF4747",

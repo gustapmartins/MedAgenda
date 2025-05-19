@@ -5,6 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CardButton } from "../../Components/Card";
 import ProfileCard from "../../Components/ProfileCard";
 import Header from "../../Components/Header";
+import { useTheme } from "../../Hooks/ThemeContext";
 
 type RootStackParamList = {
   Home: { name: string };
@@ -19,6 +20,7 @@ type RootStackParamList = {
 type HomeScreenProps = NativeStackScreenProps<RootStackParamList, "Home">;
 
 const HomeScreen = ({ navigation }: HomeScreenProps) => {
+  const { colors } = useTheme();
   const [user, setUser] = useState(null);
 
   // Função para buscar dados do usuário
@@ -38,11 +40,10 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       {/* <Text style={styles.title}>Bem-vindo(a), {user?.name || "usuário"}</Text> */}
 
-      <Header onPress={() => navigation.navigate("Notifications")}/>
-
+      <Header onPress={() => navigation.navigate("Notifications")} />
 
       <ProfileCard onPress={() => navigation.navigate("Profile")} />
 
@@ -67,9 +68,7 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
         <CardButton
           icon="cog-outline"
           label="Configurações"
-          onPress={() => {
-            navigation.navigate("Settings");
-          }}
+          onPress={() => navigation.navigate("Settings")}
         />
         <CardButton
           icon="help-circle-outline"
@@ -87,7 +86,6 @@ const styles = StyleSheet.create({
     rowGap: 16,
     padding: 20,
     justifyContent: "space-evenly", // <--- de "center" para "flex-start"
-    backgroundColor: "#E0E0E0",
   },
 });
 

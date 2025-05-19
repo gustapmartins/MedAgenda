@@ -30,34 +30,42 @@ export default function RegisterScreen({ navigation }: ProfileScreenProps) {
         Crie sua conta e preencha o formulário abaixo para começar
       </Text>
 
-      <Input
-        placeholder="E-mail"
-        onChangeValue={setEmail}
-        secureTextEntry={false}
-        value={email}
-      />
+      <View style={styles.inputContainer}>
+        <Input
+          placeholder="E-mail"
+          onChangeValue={setEmail}
+          secureTextEntry={false}
+          value={email}
+        />
+      </View>
 
-      <Input
-        placeholder="Cpf"
-        onChangeValue={setCpf}
-        secureTextEntry={false}
-        value={cpf}
-      />
+      <View style={styles.inputContainer}>
+        <Input
+          placeholder="Cpf"
+          onChangeValue={setCpf}
+          secureTextEntry={false}
+          value={cpf}
+        />
+      </View>
 
-      <Input
-        placeholder="Senha"
-        onChangeValue={setPassword}
-        secureTextEntry={false}
-        value={password}
-      />
+      <View style={styles.inputContainer}>
+        <Input
+          placeholder="Senha"
+          onChangeValue={setPassword}
+          secureTextEntry={false}
+          value={password}
+        />
+      </View>
 
-      <Input
-        placeholder="Confirmar senha"
-        onChangeValue={setConfirmPassword}
-        secureTextEntry
-        value={confirmPassword}
-      />
-
+      <View style={styles.inputContainer}>
+        <Input
+          placeholder="Confirmar senha"
+          onChangeValue={setConfirmPassword}
+          secureTextEntry
+          value={confirmPassword}
+        />
+      </View>
+      
       <TouchableOpacity style={styles.loginButton}>
         <Text style={styles.loginButtonText}>Criar</Text>
       </TouchableOpacity>
@@ -114,7 +122,7 @@ const styles = StyleSheet.create({
   },
 
   inputContainer: {
-    marginBottom: 15,
+    marginTop: 20,
   },
 
   rememberMeContainer: {
