@@ -5,13 +5,14 @@ import { FontAwesome } from "@expo/vector-icons";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 import Input from "../../Components/Input";
-import { handleRememberMe, handleLogin } from "../../Service/authService";
+import { handleRememberMe } from "../../Service/authService";
+import { useAuth } from "../../Hooks/AuthContext";
 
 // Tipagem correta da pilha de navegação
 type AuthStackParamList = {
   Login: { name: string };
   Register: { name: string };
-  HomeScreen: { name: string };
+  Home: { name: string };
 };
 
 type LoginScreenProps = NativeStackScreenProps<AuthStackParamList, "Login">;
@@ -20,6 +21,8 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [check, setCheck] = useState(false);
+
+  const { login } = useAuth();
 
   return (
     <View style={styles.container}>
@@ -73,11 +76,7 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 
       <TouchableOpacity
         style={styles.loginButton}
-        onPress={async () => {
-          await handleLogin(email, password, () =>
-            navigation.navigate("HomeScreen", { name: "HomeScreen" })
-          );
-        }}
+        onPress={() => login(email, password)}
       >
         <Text style={styles.loginButtonText}>Entrar</Text>
       </TouchableOpacity>
@@ -132,7 +131,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 
-   inputContainer: {
+  inputContainer: {
     marginTop: 20,
   },
 

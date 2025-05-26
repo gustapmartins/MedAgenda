@@ -10,28 +10,3 @@ export const handleRememberMe = async (check: boolean): Promise<boolean> => {
   }
   return check;
 };
-
-export const handleLogin = async (
-  email: string,
-  password: string,
-  onSuccess: () => void
-) => {
-  try {
-    const response = await fetch("API_ENDPOINT", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-
-    const data = await response.json();
-
-    if (data.token) {
-      await AsyncStorage.setItem("userToken", data.token);
-      onSuccess();
-    } else {
-      Alert.alert("Erro", "Credenciais inválidas.");
-    }
-  } catch (error) {
-    Alert.alert("Erro", "Erro na comunicação com o servidor.");
-  }
-};

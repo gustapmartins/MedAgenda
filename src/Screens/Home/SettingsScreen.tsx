@@ -11,10 +11,12 @@ import {
 import { useTheme } from "../../Hooks/ThemeContext";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import GoBackHeader from "../../Components/GoBackHeader";
+import { useAuth } from "../../Hooks/AuthContext";
 
 type RootStackParamList = {
   Settings: { name: string };
   Home: { name: string };
+  Login: { name: string };
 };
 
 type SettingsScreenProps = NativeStackScreenProps<
@@ -24,10 +26,7 @@ type SettingsScreenProps = NativeStackScreenProps<
 
 const SettingsScreen = ({ navigation }: SettingsScreenProps) => {
   const { toggleTheme, isDarkMode, colors } = useTheme();
-
-  const handleLogout = () => {
-    console.log("Usuário saiu da conta");
-  };
+  const { logout } = useAuth();
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
@@ -43,7 +42,7 @@ const SettingsScreen = ({ navigation }: SettingsScreenProps) => {
           styles.logoutButton,
           { backgroundColor: colors.danger },
         ]}
-        onPress={handleLogout}
+        onPress={logout}
       >
         <Text style={styles.logoutText}>Sair da Conta</Text>
       </TouchableOpacity>

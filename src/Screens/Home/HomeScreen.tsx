@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CardButton } from "../../Components/Card";
@@ -40,53 +40,58 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
   }, []);
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.background }]}>
-      {/* <Text style={styles.title}>Bem-vindo(a), {user?.name || "usuário"}</Text> */}
+    <ScrollView contentContainerStyle={styles.grid}>
+      <View style={[styles.container, { backgroundColor: colors.background }]}>
+        {/* <Text style={styles.title}>Bem-vindo(a), {user?.name || "usuário"}</Text> */}
 
-      <Header onPress={() => navigation.navigate("Notifications")} />
+        <Header onPress={() => navigation.navigate("Notifications")} />
 
-      <ProfileCard onPress={() => navigation.navigate("Profile")} />
+        <ProfileCard onPress={() => navigation.navigate("Profile")} />
 
-      <View
-        style={{
-          flexDirection: "row",
-          flexWrap: "wrap",
-          justifyContent: "space-around",
-          rowGap: 42,
-        }}
-      >
-        <CardButton
-          icon="calendar-month"
-          label="Fazer agendamento"
-          onPress={() => navigation.navigate("Consultation")}
-        />
-        <CardButton
-          icon="calendar-check-outline"
-          label="Historico de agendamentos"
-          onPress={() => navigation.navigate("History")}
-        />
-        <CardButton
-          icon="cog-outline"
-          label="Configurações"
-          onPress={() => navigation.navigate("Settings")}
-        />
-        <CardButton
-          icon="help-circle-outline"
-          label="Mais informações"
-          onPress={() => navigation.navigate("Terms")}
-        />
+        <View
+          style={{
+            flexDirection: "row",
+            flexWrap: "wrap",
+            justifyContent: "space-around",
+            rowGap: 46,
+          }}
+        >
+          <CardButton
+            icon="calendar-month"
+            label="Fazer agendamento"
+            onPress={() => navigation.navigate("Consultation")}
+          />
+          <CardButton
+            icon="calendar-check-outline"
+            label="Historico de agendamentos"
+            onPress={() => navigation.navigate("History")}
+          />
+          <CardButton
+            icon="cog-outline"
+            label="Configurações"
+            onPress={() => navigation.navigate("Settings")}
+          />
+          <CardButton
+            icon="help-circle-outline"
+            label="Mais informações"
+            onPress={() => navigation.navigate("Terms")}
+          />
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    rowGap: 16,
-    padding: 20,
-    justifyContent: "space-evenly", // <--- de "center" para "flex-start"
+    justifyContent: "space-around", // <--- de "center" para "flex-start"
   },
+
+  grid: {
+    flexGrow: 1,
+    justifyContent: "space-between",
+  }
 });
 
 export default HomeScreen;

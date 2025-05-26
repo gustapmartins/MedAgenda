@@ -2,6 +2,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect } from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useAuth } from '../../Hooks/AuthContext';
 
 type RootStackParamList = {
   Splash: { name: string };
@@ -12,33 +13,18 @@ type RootStackParamList = {
 type SplashProps = NativeStackScreenProps<RootStackParamList, 'Splash'>;
 
 const SplashScreen = ({ navigation }: SplashProps) => {
+  const { isLoggedIn } = useAuth();
+
   useEffect(() => {
-    const checkLogin = async () => {
-      try {
-        const token = await AsyncStorage.getItem('userToken');
+    const timer = setTimeout(() => {
+      navigation.reset({
+        index: 0,
+        routes: [{ name: isLoggedIn ? 'Home' : 'Onboarding' }],
+      });
+    }, 1500);
 
-        if (token) {
-          navigation.reset({
-            index: 0,
-            routes: [{ name: 'Home' }],
-          });
-        } else {
-          navigation.reset({
-            index: 0,
-            routes: [{ name: 'Onboarding', params: { name: 'Onboarding' } }],
-          });
-        }
-      } catch (error) {
-        console.error('Erro ao verificar login:', error);
-        navigation.reset({
-          index: 0,
-          routes: [{ name: 'Onboarding', params: { name: 'Onboarding' } }],
-        });
-      }
-    };
-
-    setTimeout(checkLogin, 1500); // Pequeno delay para exibir splash
-  }, [navigation]);
+    return () => clearTimeout(timer);
+  }, [isLoggedIn, navigation]);
 
   return (
     <View style={styles.container}>
